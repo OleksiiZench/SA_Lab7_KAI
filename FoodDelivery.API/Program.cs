@@ -1,36 +1,58 @@
+﻿// FoodDelivery.API/Program.cs
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using FoodDelivery.API.Mapping;
+using FoodDelivery.DI;
 
-namespace FoodDelivery.API
+var builder = WebApplication.CreateBuilder(args);
+
+// Використовуємо Autofac як DI-контейнер
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
+    // Передаємо containerBuilder напряму для реєстрацій
+    DependencyConfig.ConfigureContainer(containerBuilder);
+
+    // Реєструємо AutoMapper профіль
+    containerBuilder.Register(ctx =>
+        new AutoMapper.MapperConfiguration(cfg =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            cfg.AddProfile<ApiMappingProfile>();
+        })
+    ).AsSelf().SingleInstance();
+});
 
-            // Add services to the container.
+// Додаємо контролери
+builder.Services.AddControllers();
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+// Додаємо Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
+// Додаємо CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+var app = builder.Build();
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
-        }
-    }
+// Налаштування HTTP request pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();

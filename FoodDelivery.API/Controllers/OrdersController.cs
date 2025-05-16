@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FoodDelivery.API.Models;
-using FoodDelivery.BLL.Models;
 using FoodDelivery.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,26 +76,36 @@ namespace FoodDelivery.API.Controllers
             return Ok(_mapper.Map<List<OrderItemModel>>(orderItems));
         }
 
-        // DELETE: api/Orders/5/items/3
         [HttpDelete("{orderId}/items/{itemId}")]
         public ActionResult DeleteOrderItem(int orderId, int itemId)
         {
-            // Тут потрібно додати метод до сервісу для видалення елемента замовлення
-            // _orderService.RemoveOrderItem(orderId, itemId);
+            var result = _orderService.RemoveOrderItem(orderId, itemId);
 
-            // Оскільки цього методу немає в наданому коді, повернемо NotImplemented
-            return StatusCode(501, "Метод не реалізований");
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
         // PUT: api/Orders/5/items/3
         [HttpPut("{orderId}/items/{itemId}")]
         public ActionResult UpdateOrderItem(int orderId, int itemId, [FromBody] CreateOrderItemModel model)
         {
-            // Тут потрібно додати метод до сервісу для оновлення елемента замовлення
-            // _orderService.UpdateOrderItem(orderId, itemId, model.Quantity);
+            if (model == null || model.Quantity <= 0)
+            {
+                return BadRequest("Кількість повинна бути більше 0");
+            }
 
-            // Оскільки цього методу немає в наданому коді, повернемо NotImplemented
-            return StatusCode(501, "Метод не реалізований");
+            var result = _orderService.UpdateOrderItem(orderId, itemId, model.Quantity);
+
+            if (!result)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }

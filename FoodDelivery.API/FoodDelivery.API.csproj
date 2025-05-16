@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SA_Lab6\FoodDelivery.DI\FoodDelivery.DI.csproj" />
     <ProjectReference Include="..\..\SA_Lab6\Food_Delivery.BLL\FoodDelivery.BLL.csproj" />
+    <ProjectReference Include="..\..\SA_Lab6\Food_Delivery.DAL\FoodDelivery.DAL.csproj" />
   </ItemGroup>
 
 </Project>
