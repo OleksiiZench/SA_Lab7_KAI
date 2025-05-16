@@ -76,6 +76,7 @@ namespace FoodDelivery.API.Controllers
             return Ok(_mapper.Map<List<OrderItemModel>>(orderItems));
         }
 
+        // DELETE: api/Orders/5/items/3
         [HttpDelete("{orderId}/items/{itemId}")]
         public ActionResult DeleteOrderItem(int orderId, int itemId)
         {

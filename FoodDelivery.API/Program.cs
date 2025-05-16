@@ -1,7 +1,8 @@
-﻿// FoodDelivery.API/Program.cs
-using Autofac;
+﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using FoodDelivery.API.Mapping;
+using FoodDelivery.BLL.Mapping;
 using FoodDelivery.DI;
 
 var builder = WebApplication.CreateBuilder(args);
