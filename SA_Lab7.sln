@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.API", "FoodDelivery.API\FoodDelivery.API.csproj", "{8BC578DA-CA83-40D8-AD72-2722CD686834}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.DI", "..\SA_Lab6\FoodDelivery.DI\FoodDelivery.DI.csproj", "{01F73309-92AE-0F6F-C53A-C9BE0DFB6A3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.Tests", "..\SA_Lab6\FoodDelivery.Tests\FoodDelivery.Tests.csproj", "{F753CF69-ED44-AC90-7871-67EB1A4D0CC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodDelivery.ConsoleUI", "FoodDelivery.ConsoleUI\FoodDelivery.ConsoleUI.csproj", "{0053D621-B480-4B04-8F07-64F02E68BFAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F753CF69-ED44-AC90-7871-67EB1A4D0CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F753CF69-ED44-AC90-7871-67EB1A4D0CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F753CF69-ED44-AC90-7871-67EB1A4D0CC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0053D621-B480-4B04-8F07-64F02E68BFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0053D621-B480-4B04-8F07-64F02E68BFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0053D621-B480-4B04-8F07-64F02E68BFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0053D621-B480-4B04-8F07-64F02E68BFAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
