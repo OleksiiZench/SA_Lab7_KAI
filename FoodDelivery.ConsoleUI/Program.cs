@@ -11,6 +11,7 @@ namespace FoodDelivery.ConsoleUI
         static async Task Main(string[] args)
         {
             client.BaseAddress = new Uri(baseUrl);
+            Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             bool exit = false;

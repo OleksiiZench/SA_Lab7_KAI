@@ -15,14 +15,22 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     // Передаємо containerBuilder напряму для реєстрацій
     DependencyConfig.ConfigureContainer(containerBuilder);
 
-    // Реєструємо AutoMapper профіль
+    // Реєструємо AutoMapper профілі
     containerBuilder.Register(ctx =>
         new AutoMapper.MapperConfiguration(cfg =>
         {
             cfg.AddProfile<ApiMappingProfile>();
+            // Додайте BllMappingProfile, якщо він існує
+            cfg.AddMaps(typeof(FoodDelivery.BLL.Models.DishDto).Assembly);
         })
     ).AsSelf().SingleInstance();
+
+    // Реєструємо IMapper
+    containerBuilder.Register(ctx => ctx.Resolve<AutoMapper.MapperConfiguration>().CreateMapper())
+        .As<AutoMapper.IMapper>()
+        .SingleInstance();
 });
+
 
 // Додаємо контролери
 builder.Services.AddControllers();
